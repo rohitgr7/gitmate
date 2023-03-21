@@ -1,0 +1,15 @@
+# Python
+__pycache__*
+
+# MacOps
+.DS_Store
+
+# environment
+.env
+
+# virtual environment
+venv/
+
+# Development
+research/
+dist/
