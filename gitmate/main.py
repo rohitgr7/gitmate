@@ -96,7 +96,9 @@ def create_pr():
         console.print(creds["error"], style="bold red")
 
     openai_key, model_name = creds
-    commit_messages = subprocess.run(["git", "log", "--pretty=format:%s", "--reverse"], capture_output=True, text=True)
+    commit_messages = subprocess.run(
+        ["git", "log", "main..", "--pretty=format:%s", "--reverse"], capture_output=True, text=True
+    )
     commit_messages = commit_messages.stdout
 
     if not commit_messages:
