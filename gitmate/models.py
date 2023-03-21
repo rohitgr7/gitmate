@@ -4,6 +4,7 @@ from rich.console import Console
 
 console = Console()
 
+
 def predict_gpt35(prompt, max_tokens, openai_key):
     headers = {
         "Content-type": "application/json",
@@ -66,8 +67,8 @@ def predict_commit_message(diff, openai_key, model_name):
 def predict_pr_details(commit_messages, openai_key, model_name):
     with Halo(text="Generating PR details", spinner="dots"):
         prompt = f"""
-        Craft a consice short title and insightful description for a GitHub PR that describes the changes in the following
-        based on following commit messages without any unnecessary context: {commit_messages}
+        Craft a consice short title and insightful description for a GitHub PR that describes the changes in the
+        following based on following commit messages without any unnecessary context: {commit_messages}
         """
         response = predict(prompt, 200, openai_key, model_name)
 

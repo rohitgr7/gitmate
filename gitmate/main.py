@@ -3,12 +3,12 @@ import os
 import subprocess
 from getpass import getpass
 
-import requests
 import typer
 from halo import Halo
 from rich.console import Console
+
 from gitmate.models import predict, predict_commit_message, predict_pr_details
-from gitmate.utils import get_creds, check_gh_cli_installation, check_message_with_user
+from gitmate.utils import check_gh_cli_installation, check_message_with_user, get_creds
 
 console = Console()
 
@@ -18,7 +18,6 @@ MODEL_OPTIONS = {
     # '3': {'name': 'GPT4', 'openai_model': 'gpt-4'},
 }
 app = typer.Typer()
-
 
 
 @app.command()
@@ -56,7 +55,7 @@ def verify():
 
     with Halo(text="Verifying", spinner="dots"):
         openai_key, model_name = creds
-        response = predict('Who are you?', 5, openai_key, model_name)
+        response = predict("Who are you?", 5, openai_key, model_name)
 
     if "error" in response:
         console.print(response["error"]["message"], style="bold red")
@@ -97,7 +96,9 @@ def create_pr():
         console.print(creds["error"], style="bold red")
 
     openai_key, model_name = creds
-    commit_messages = subprocess.run(["git", "log", "--pretty=format:%s", "--reverse"], capture_output=True, text=True)
+    commit_messages = subprocess.run(
+        ["git", "log", "main..", "--pretty=format:%s", "--reverse"], capture_output=True, text=True
+    )
     commit_messages = commit_messages.stdout
 
     if not commit_messages:
@@ -112,5 +113,3 @@ def create_pr():
     title = check_message_with_user(title, "PR title")
     description = check_message_with_user(description, "PR description")
     subprocess.run(["gh", "pr", "create", "-t", title, "-b", description])
-
-
