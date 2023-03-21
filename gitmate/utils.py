@@ -1,10 +1,11 @@
+import configparser
+import os
 import subprocess
 
 from rich.console import Console
-import configparser
-import os
 
 console = Console()
+
 
 def check_gh_cli_installation():
     try:
@@ -46,4 +47,3 @@ def get_creds(model_options):
         return {"error": "GitMate credentials are not set, please use `gitmate connect`."}
 
     return openai_key, model_name
-
