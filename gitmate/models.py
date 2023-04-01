@@ -53,8 +53,8 @@ def predict(prompt, max_tokens, openai_key, model_name):
 def predict_commit_message(diff, openai_key, model_name):
     with Halo(text="Generating Commit Message", spinner="dots"):
         prompt = f"""
-        Craft a short and insightful Git commit message that describes the changes in the following diff without
-        any unnecessary context: {diff}
+        Craft a short and insightful Git commit message of upto 15 words that describes the changes in
+        the following diff without any unnecessary context: {diff}
         """
         response = predict(prompt, 50, openai_key, model_name)
 

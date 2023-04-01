@@ -89,7 +89,10 @@ def commit():
 @app.command()
 def create_pr():
     """Create a PR with title and description."""
-    check_gh_cli_installation()
+    cli_installed = check_gh_cli_installation()
+
+    if not cli_installed:
+        return
 
     creds = get_creds(MODEL_OPTIONS)
     if isinstance(creds, dict):
