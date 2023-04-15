@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gitmate"
-version = "0.0.2"
+version = "0.0.3"
 description = ""
 authors = ["Rohit Gupta <rohitgr1998@gmail.com>"]
 readme = "README.md"

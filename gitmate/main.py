@@ -52,6 +52,7 @@ def verify():
     creds = get_creds(MODEL_OPTIONS)
     if isinstance(creds, dict):
         console.print(creds["error"], style="bold red")
+        return
 
     with Halo(text="Verifying", spinner="dots"):
         openai_key, model_name = creds
@@ -69,6 +70,7 @@ def commit():
     creds = get_creds(MODEL_OPTIONS)
     if isinstance(creds, dict):
         console.print(creds["error"], style="bold red")
+        return
 
     openai_key, model_name = creds
     diff = subprocess.run(["git", "diff", "--cached"], capture_output=True, text=True)
@@ -97,6 +99,7 @@ def create_pr():
     creds = get_creds(MODEL_OPTIONS)
     if isinstance(creds, dict):
         console.print(creds["error"], style="bold red")
+        return
 
     openai_key, model_name = creds
     commit_messages = subprocess.run(
